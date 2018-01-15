@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>左右tab切换</title>
+	<meta charset="utf-8">
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+
+		ul,li{
+			list-style: none;
+		}
+
+		.clearfix:after{
+			content: "";
+			display: block;
+			clear: both;
+		}
+
+		.wrapper{
+			margin-top: 10px;
+			margin-left: 10px;
+		}
+		.tab li{
+			float: left;
+			cursor: pointer;
+			border: 1px solid #ddd;
+			padding: 5px 50px;
+			border-right: none;
+		}
+
+		.tab li:last-child{
+			border-right: 1px solid #ddd;
+		}
+
+		.scroll li{
+			float: left;
+			width: 407px;
+			height: 150px;
+		}
+
+		.scroll li:nth-child(1){
+			background-color: red;
+		}
+
+		.scroll li:nth-child(2){
+			background-color: blue;
+		}
+
+		.scroll li:nth-child(3){
+			background-color: yellow;
+		}
+
+		.scroll{
+			position: absolute;
+			width: 1221px;
+		}
+
+		.content{
+			position: relative;
+			width: 407px;
+			height: 150px;
+			border:1px solid #ddd;
+			border-top:none;
+			overflow: hidden;
+		}
+
+		 .hover{
+			background-color: #ddd;
+		}
+	</style>
+
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="nav">
+			<ul class="tab clearfix">
+				<li class="hover">tab1</li>
+				<li>tab2</li>
+				<li>tab3</li>
+			</ul>
+		</div>
+		<div class="content">
+			<ul class="scroll clearfix">
+				<li>内容1</li>
+				<li>内容2</li>
+				<li>内容3</li>
+			</ul>
+		</div>
+	</div>
+
+	<script>
+		$('.tab li').on('click',function(){
+			$(this).siblings().removeClass('hover');
+			$(this).addClass('hover');
+			var leftOffset = -$(this).index()*407+'px'
+			$('.scroll').animate({left:leftOffset},1000)
+		})
+	</script>
+</body>
+</html>
